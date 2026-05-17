@@ -56,8 +56,8 @@ if (session_status() === PHP_SESSION_NONE) {
                 </li>
 
                 <li class="nav-item">
-    <a class="nav-link" href="about.php">About</a>
-</li>
+                    <a class="nav-link" href="about.php">About</a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="contact.php">Contact</a>
@@ -68,6 +68,9 @@ if (session_status() === PHP_SESSION_NONE) {
                     <?php if (($_SESSION["role"] ?? "") === "admin"): ?>
                         <li class="nav-item">
                             <a class="nav-link" href="dashboard.php">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="messages.php">Messages</a>
                         </li>
                     <?php endif; ?>
 
