@@ -1,26 +1,48 @@
 <?php
 
-class Database {
-    private $host = "localhost";
-    private $dbname = "webdev_project";
-    private $username = "root";
-    private $password = "";
-    private $connection;
+// Define a class called "Database"
+class Database {             
+    // DB server address (local)           
+    private $host = "localhost";       
+    // Name of the database to connect to 
+    private $dbname = "webdev_project"; 
+    // DB username
+    private $username = "root";     
+    // DB password (empty)
+    private $password = "";    
+    // Variable to store the connection (at the start - null)        
+    private $connection;               
 
-    public function connect() {
-        if ($this->connection === null) {
-            try {
-                $this->connection = new PDO(
-                    "mysql:host={$this->host};dbname={$this->dbname};charset=utf8",
-                    $this->username,
-                    $this->password
+     // Public method to get a DB connection
+    public function connect() {      
+        // Only connect if not already connected
+        if ($this->connection === null) { 
+            // Try to connect, catch errors if it fails  
+            try {                         
+                // Create a new PDO connection  
+                $this->connection = new PDO(          
+                    // DSN string: driver, host, db name, encoding  
+                    "mysql:host={$this->host};dbname={$this->dbname};charset=utf8", 
+                    // Pass the username
+                    $this->username,        
+                     // Pass the password          
+                    $this->password                     
                 );
-                $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (PDOException $e) {
-                die("DB Error: " . $e->getMessage());
+                // Configure the connection:
+                $this->connection->setAttribute(      
+                    // setting: error mode 
+                    PDO::ATTR_ERRMODE,       
+                    // value: throw exceptions on errors          
+                    PDO::ERRMODE_EXCEPTION              
+                );
+            // If connection fails, catch error
+            } catch (PDOException $e) {     
+                // Stop the script and show the error message            
+                die("DB Error: " . $e->getMessage());   
             }
         }
 
-        return $this->connection;
+        // Return the active connection
+        return $this->connection;       
     }
 }
